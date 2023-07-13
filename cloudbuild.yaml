@@ -1,0 +1,14 @@
+steps: 
+  - id: "build-docker-image"
+    name: "gcr.io/cloud-builders/docker"
+    args : ['build', '.', '-t', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_IMAGE_VERSION}']
+    dir: "."
+  - id: "push-docker-image-to-gcr" 
+    name: "gcr.io/cloud-builders/docker" 
+    args: ['push', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_IMAGE_VERSION}']
+     # Change _PROJECT_ID in deploy.yaml
+substitutions:
+    _PROJECT_ID: "myfirstproject-384110"
+    _IMAGE_NAME: "weatherservice"
+    _IMAGE_VERSION: "1.0.0"
+
